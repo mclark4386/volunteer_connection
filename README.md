@@ -2,7 +2,7 @@
 ## Setup:
 
 ```
-./manage.py migrate -a
+./manage.py migrate
 ./manage.py createsuperuser
 ./manage.py runserver
 ```
