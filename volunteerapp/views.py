@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 from django.views.generic import View
 from .forms import UserForm
+from .models import UserProfile
 
 
 def Index(request):
@@ -30,6 +31,8 @@ class UserFormView(View):
             if len(password) < 8:  # if password is shorter than 8 chars
                 return redirect(self)
             user.save()
+            if user.profile is None:
+                user.profile = UserProfile()
 
             user = authenticate(username=username, password=password)
 
