@@ -12,7 +12,7 @@ class UserProfile(models.Model):
                          related_name="profile",
                          related_query_name="profile",)
     karma = models.DecimalField(max_digits=10,decimal_places=2)
-#    default_tags = models.ManyToManyField(Tag, related_name="+")
+    default_tags = models.ManyToManyField('volunteerapp.Tag', related_name="+")
 
     def __str__(self):
         return self.user.username + "'s profile"
