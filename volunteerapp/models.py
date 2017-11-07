@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class ProjectCategory(models.Model):
     name = models.CharField(max_length=250)
-    description = models.CharField(max_length=1500)
+    description = models.TextField()
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User,
@@ -12,10 +12,20 @@ class UserProfile(models.Model):
                          related_name="profile",
                          related_query_name="profile",)
     karma = models.DecimalField(max_digits=10,decimal_places=2)
-#    default_tags = models.ManyToManyField(Tag, related_name="+")
+    default_tags = models.ManyToManyField('volunteerapp.Tag', related_name="+")
 
     def __str__(self):
         return self.user.username + "'s profile"
 
     def cacheKarma(self):
         pass
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=140)
+    description = models.TextField()
+    color = models.CharField(max_length=25)
+#    projects = models.ManyToManyField('volunteerapp.Project', related_name="tags", related_query_name="tags")
+
+    def __str__(self):
+        return self.name
