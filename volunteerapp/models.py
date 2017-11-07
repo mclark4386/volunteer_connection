@@ -25,6 +25,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=140)
     description = models.TextField()
     color = models.CharField(max_length=25)
+#    projects = models.ManyToManyField('volunteerapp.Project', related_name="tags", related_query_name="tags")
 
     def __str__(self):
         return self.name
