@@ -33,6 +33,18 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+class ProjectEmail(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey('volunteerapp.ProjectCategory')
+    fromEmail = models.CharField(max_length=500)
+    toEmail = models.CharField(max_length=500)
+    emailBCC = models.TextField()
+    emailSubject = models.CharField(max_length=250)
+    emailBody = models.TextField()
+
+    def __str__(self):
+        return self.project 
+
 
 class Project(models.Model):
     title = models.CharField(max_length=140)
