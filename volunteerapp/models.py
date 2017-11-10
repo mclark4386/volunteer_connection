@@ -38,7 +38,7 @@ class Project(models.Model):
     title = models.CharField(max_length=140)
     category = models.ForeignKey('volunteerapp.ProjectCategory')
     organization = models.ForeignKey(Group)
-    volunteers = models.ManyToManyField(User, blank=True)
+    volunteers = models.ManyToManyField(User, blank=True, through='Participation')
 #    locations = models.ManyToManyField('volunteerapp.Location')
     description = models.TextField()
     tags = models.ManyToManyField('volunteerapp.Tag', blank=True)
@@ -46,3 +46,10 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Participation(models.Model):
+    user = models.ForeignKey(User)
+    project = models.ForeignKey('volunteerapp.Project')
+    promised_hours = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    actual_hours = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
