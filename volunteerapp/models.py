@@ -34,8 +34,8 @@ class Tag(models.Model):
         return self.name
 
 class ProjectEmail(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    project = models.ForeignKey('volunteerapp.ProjectCategory')
+    user = models.ForeignKey(User)
+    project = models.ForeignKey('volunteerapp.Project')
     fromEmail = models.CharField(max_length=500)
     toEmail = models.CharField(max_length=500)
     emailBCC = models.TextField()
@@ -43,7 +43,7 @@ class ProjectEmail(models.Model):
     emailBody = models.TextField()
 
     def __str__(self):
-        return self.project 
+        return self.project
 
 
 class Project(models.Model):
