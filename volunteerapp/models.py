@@ -1,18 +1,21 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 class ProjectCategory(models.Model):
     name = models.CharField(max_length=250)
     description = models.TextField()
 
+    def __str__(self):
+        return self.name
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User,
                          on_delete=models.CASCADE,
                          related_name="profile",
                          related_query_name="profile",)
-    karma = models.DecimalField(max_digits=10,decimal_places=2)
-    default_tags = models.ManyToManyField('volunteerapp.Tag', related_name="+")
+    karma = models.DecimalField(max_digits=10,decimal_places=2, default=0.0)
+    default_tags = models.ManyToManyField('volunteerapp.Tag', related_name="+", blank=True)
 
     def __str__(self):
         return self.user.username + "'s profile"
@@ -25,7 +28,21 @@ class Tag(models.Model):
     name = models.CharField(max_length=140)
     description = models.TextField()
     color = models.CharField(max_length=25)
-#    projects = models.ManyToManyField('volunteerapp.Project', related_name="tags", related_query_name="tags")
+    projects = models.ManyToManyField('volunteerapp.Project', blank=True)
 
     def __str__(self):
         return self.name
+
+
+class Project(models.Model):
+    title = models.CharField(max_length=140)
+    category = models.ForeignKey('volunteerapp.ProjectCategory')
+    organization = models.ForeignKey(Group)
+    volunteers = models.ManyToManyField(User, blank=True)
+#    locations = models.ManyToManyField('volunteerapp.Location')
+    description = models.TextField()
+    tags = models.ManyToManyField('volunteerapp.Tag', blank=True)
+    #TODO: implement times
+
+    def __str__(self):
+        return self.title
