@@ -45,6 +45,21 @@ class ProjectEmail(models.Model):
     def __str__(self):
         return self.project
 
+class GoldStars(models.Model):
+    user = models.ForeignKey(User,
+                         on_delete=models.CASCADE,
+                         related_name="awarder",
+                         related_query_name="awarder",)
+    receiver = models.ForeignKey(User,
+                         on_delete=models.CASCADE,
+                         related_name="receiver",
+                         related_query_name="receiver",)
+    reason = models.CharField(max_length=1000)
+
+
+    def __str__(self):
+        return self.receiver
+
 
 class Project(models.Model):
     title = models.CharField(max_length=140)
