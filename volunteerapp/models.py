@@ -60,6 +60,16 @@ class GoldStars(models.Model):
     def __str__(self):
         return self.receiver
 
+class Locations(models.Model):
+    organization = models.ForeignKey(Group)
+    name = models.CharField(max_length=500)
+    descrip = models.TextField()
+    gpsCoord = models.CharField(max_length=2500)
+    address = models.CharField(max_length=500)
+    hours = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.name
 
 class Project(models.Model):
     title = models.CharField(max_length=140)
