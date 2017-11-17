@@ -9,9 +9,22 @@
     </title>
 
     {% load staticfiles %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    {% load bootstrap4 %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    {% bootstrap_css %}
+
+    {% if 'javascript_in_head'|bootstrap_setting %}
+        <!-- Bootstrap JavaScript if it is in head -->
+        {% bootstrap_javascript %}
+    {% endif %}
+
+    {% block bootstrap4_extra_head %}{% endblock %}
+        
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
     <script src="https://use.fontawesome.com/23f7c48fc6.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'volunteerapp/style.css' %}"/>
