@@ -18,14 +18,17 @@ RUN apt-get -y update \
         shared-mime-info \
         libcairo2 \
     && apt-get -y clean \
-    && mkdir /code
-
+    && mkdir /code \
+    && pip install -U pip 
+    
 WORKDIR /code
+COPY requirements.txt /code/
+
+RUN pip install -Ur requirements.txt
+
 COPY . /code/
 
-RUN pip install -U pip \
-    && pip install -Ur requirements.txt \
-    && python /code/manage.py collectstatic --noinput
+RUN python /code/manage.py collectstatic --noinput
 
 EXPOSE 8000
 
