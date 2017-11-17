@@ -15,6 +15,10 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+#Incase we need it for later (found at https://stackoverflow.com/questions/44407499/django-not-loading-static-files-pycharm )
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'static'),
+#    ]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -25,12 +29,13 @@ SECRET_KEY = 'dcajdwfv=91&)*ieyv$8x7uk7w*-s6elhh+fna!fqsb4-+t@(k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['web','localhost','127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
     'bootstrap4',
     'volunteerapp.apps.VolunteerappConfig',
     'django.contrib.admin',
@@ -79,6 +84,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'production': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'volunteer_connection',
+        'USER': 'user',
+        'PASSWORD': 'password',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
@@ -120,5 +133,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_REDIRECT_URL = '/'
+
+ADMINS = [('Matt','mclark4386@gmail.com')]
