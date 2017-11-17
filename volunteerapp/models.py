@@ -45,28 +45,29 @@ class ProjectEmail(models.Model):
     def __str__(self):
         return self.project
 
-class GoldStars(models.Model):
-    user = models.ForeignKey(User,
+class GoldStar(models.Model):
+    awarder = models.ForeignKey(User,
                          on_delete=models.CASCADE,
-                         related_name="awarder",
-                         related_query_name="awarder",)
+                         related_name="awarded_gold_stars",
+                         related_query_name="awarded_gold_stars",)
     receiver = models.ForeignKey(User,
                          on_delete=models.CASCADE,
-                         related_name="receiver",
-                         related_query_name="receiver",)
+                         related_name="my_gold_stars",
+                         related_query_name="my_gold_stars",)
     reason = models.CharField(max_length=1000)
 
 
     def __str__(self):
         return self.receiver
 
-class Locations(models.Model):
+class Location(models.Model):
     organization = models.ForeignKey(Group)
     name = models.CharField(max_length=500)
     descrip = models.TextField()
     gpsCoord = models.CharField(max_length=2500)
     address = models.CharField(max_length=500)
     hours = models.CharField(max_length=500)
+
 
     def __str__(self):
         return self.name
@@ -76,14 +77,15 @@ class Project(models.Model):
     category = models.ForeignKey('volunteerapp.ProjectCategory')
     organization = models.ForeignKey(Group)
     volunteers = models.ManyToManyField(User, blank=True, through='Participation')
-#    locations = models.ManyToManyField('volunteerapp.Location')
+    locations = models.ManyToManyField('volunteerapp.Location',
+                                        related_name = "projects",
+                                        related_query_name = "projects")
     description = models.TextField()
     tags = models.ManyToManyField('volunteerapp.Tag', blank=True)
     #TODO: implement times
 
     def __str__(self):
         return self.title
-
 
 class Participation(models.Model):
     user = models.ForeignKey(User)
