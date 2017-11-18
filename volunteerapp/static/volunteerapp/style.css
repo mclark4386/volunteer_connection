@@ -5,3 +5,17 @@
 .navbar-brand{
   font-family: 'Satisfy', cursive;
 }
+
+.project-font{
+  font-family: 'Roboto', sans-serif;
+}
+
+#custom-fontspec {
+  font-size: 16pt;
+  color: #444444;
+}
+
+ul {
+    list-style-position: inside;
+    list-style-image: url('http://i.imgur.com/b9b13Rd.png');
+}

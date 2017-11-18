@@ -2,5 +2,11 @@
 {% block Projects_active %}active{% endblock %}
 
 {% block body %}
-<h1 class="text-primary">Looking good! {{ user.username }}</h1>
+<h1 class="project-font"><strong> Projects </strong> </h1>
+
+<ul>
+  {% for project in projects %}
+  <li><a id="custom-fontspec" class ="project-font" href="#">{{ project.title }}</a></li>
+  {% endfor %}
+</ul>
 {% endblock %}
