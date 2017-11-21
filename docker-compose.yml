@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - ./dbdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   web:
     # Docker hack to wait until Postgres is up, then run stuff.
@@ -17,6 +19,8 @@ services:
     build: .
     volumes:
       - .:/code
+    links:
+      - "db:db"
     depends_on:
       - db
     environment:
@@ -29,3 +33,5 @@ services:
     ports:
       - "80:8000"
     command: -port 8000 -host 0.0.0.0 "proxy / web:8000 { }"
+
+  
