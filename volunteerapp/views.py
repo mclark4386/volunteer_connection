@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
 from .forms import UserForm
-from .models import UserProfile
+from .models import UserProfile, Project
 
 
 def Index(request):
-    context = {}
+    projects = Project.objects.all()
+    context = {"projects": projects}
     return render(request, 'volunteerapp/index.html', context)
 
 
