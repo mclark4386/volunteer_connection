@@ -73,6 +73,8 @@ class Location(models.Model):
         return self.name
 
 class Project(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=140)
     category = models.ForeignKey('volunteerapp.ProjectCategory')
     organization = models.ForeignKey(Group)
