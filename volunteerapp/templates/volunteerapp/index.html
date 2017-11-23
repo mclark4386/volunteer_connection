@@ -5,7 +5,25 @@
 
 {% block body %}
 <h1 class="project-font"><strong> Projects </strong> </h1>
-
+{% if tags is not None %}
+<form id="tag_select_form" class='form-inline' role="search" method="get" action=''>
+  <select name='tag' onchange="$('#tag_select_form').submit();">
+    <optgroup label="You can reset your search by selecting this:">
+      <option value=''>Tag To Filter By</option>
+    </optgroup>
+    <!-- {{selected_tag}} -->
+    <optgroup label="Tags">
+      {% for tag in tags %}
+        {% if tag.id == selected_tag %}
+          <option value='{{tag.id}}' selected>{{tag.name}}</option>
+        {% else %}
+          <option value='{{tag.id}}'>{{tag.name}}</option>
+        {% endif %}
+      {% endfor %}
+    </optgroup>
+  </select>
+</form>
+{% endif %}
 <ul>
   {% for project in projects %}
   <li><a class="custom-fontspec project-font" href="#">{{ project.title }}</a></li>

@@ -2,23 +2,29 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
 from .forms import UserForm
-from .models import UserProfile, Project
+from .models import UserProfile, Project, Tag
 from .search import get_query
 
 
 def Index(request):
     projects = []
     query_string = ''
+    selected_tag = ''
+    tags = Tag.objects.all()
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
         search_query = get_query(query_string, ['title', 'description'])
         projects = Project.objects.filter(search_query).order_by('-created_at')
+    elif ('tag' in request.GET) and request.GET['tag']:
+        try:
+            selected_tag = int(request.GET['tag'])
+            projects = Tag.objects.get(id=selected_tag).project_set.all()
+        except ValueError as e:
+            projects = Project.objects.all()
     else:
         projects = Project.objects.all()
-    context = {"projects": projects, "query_string": query_string}
+    context = {"projects": projects, "query_string": query_string, "tags": tags, "selected_tag": selected_tag}
     return render(request, 'volunteerapp/index.html', context)
-
-
 class UserFormView(View):
     form_class = UserForm
     template_name = 'volunteerapp/registration_form.html'
