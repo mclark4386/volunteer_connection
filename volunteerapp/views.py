@@ -3,11 +3,19 @@ from django.contrib.auth import authenticate, login
 from django.views.generic import View
 from .forms import UserForm
 from .models import UserProfile, Project
+from .search import get_query
 
 
 def Index(request):
-    projects = Project.objects.all()
-    context = {"projects": projects}
+    projects = []
+    query_string = ''
+    if ('q' in request.GET) and request.GET['q'].strip():
+        query_string = request.GET['q']
+        search_query = get_query(query_string, ['title', 'description'])
+        projects = Project.objects.filter(search_query).order_by('-created_at')
+    else:
+        projects = Project.objects.all()
+    context = {"projects": projects, "query_string": query_string}
     return render(request, 'volunteerapp/index.html', context)
 
 

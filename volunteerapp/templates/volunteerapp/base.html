@@ -47,8 +47,8 @@
           </li>
         </ul>
 
-        <form class="form-inline my-2 my-lg-0" role="search" method="get" action="#">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="q" value="">
+        <form class="form-inline my-2 my-lg-0" role="search" method="get" action="/">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="q" value="{% block query_string %}{% endblock %}">
           <button class="btn btn-outline-default my-2 my-sm-0" type="submit">Search</button>
         </form>
 
