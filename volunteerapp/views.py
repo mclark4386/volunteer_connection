@@ -11,18 +11,18 @@ def Index(request):
     query_string = ''
     selected_tag = ''
     tags = Tag.objects.all()
+    project_set = Project.objects
+    if ('tag' in request.GET) and request.GET['tag']:
+        try:
+            selected_tag = int(request.GET['tag'])
+            project_set = Tag.objects.get(id=selected_tag).project_set
+        except ValueError as e:
+            pass
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
         search_query = get_query(query_string, ['title', 'description'])
-        projects = Project.objects.filter(search_query).order_by('-created_at')
-    elif ('tag' in request.GET) and request.GET['tag']:
-        try:
-            selected_tag = int(request.GET['tag'])
-            projects = Tag.objects.get(id=selected_tag).project_set.all()
-        except ValueError as e:
-            projects = Project.objects.all()
-    else:
-        projects = Project.objects.all()
+        project_set = project_set.filter(search_query).order_by('-created_at')
+    projects = project_set.all()
     context = {"projects": projects, "query_string": query_string, "tags": tags, "selected_tag": selected_tag}
     return render(request, 'volunteerapp/index.html', context)
 class UserFormView(View):

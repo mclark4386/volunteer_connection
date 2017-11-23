@@ -7,6 +7,7 @@
 <h1 class="project-font"><strong> Projects </strong> </h1>
 {% if tags is not None %}
 <form id="tag_select_form" class='form-inline' role="search" method="get" action=''>
+  <input type="hidden" name="q" value="{{query_string}}"/>
   <select name='tag' onchange="$('#tag_select_form').submit();">
     <optgroup label="You can reset your search by selecting this:">
       <option value=''>Tag To Filter By</option>
@@ -24,9 +25,13 @@
   </select>
 </form>
 {% endif %}
+{% if projects|length > 0 %}
 <ul>
   {% for project in projects %}
   <li><a class="custom-fontspec project-font" href="#">{{ project.title }}</a></li>
   {% endfor %}
 </ul>
+{% else %}
+<h5>No Projects Found</h5>
+{% endif %}
 {% endblock %}
