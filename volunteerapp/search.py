@@ -2,6 +2,10 @@ import re
 
 from django.db.models import Q
 
+# found this @ https://www.julienphalip.com/blog/adding-search-to-a-django-site-in-a-snap/ create to Julien Phalip
+# will switch to http://haystacksearch.org/ at some point probably with either solr or elasticsearch
+# but for now this will do to get it working
+
 def normalize_query(query_string,
                     findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
                     normspace=re.compile(r'\s{2,}').sub):
