@@ -2,24 +2,50 @@
 {% block title %}Registration{% endblock %}
 
 {% block body %}
-<div class="container-fluid ">
-    <div class="row">
-        <div class="col-sm-12 col-md-7">
-          <div class="">
-            <h1>Create new user:</h1>
-                <form class="form-horizonal" action="" method="post" enctype="multipart/form-data" >
-                    {% csrf_token %}
-                    {% include 'volunteerapp/form-template.html' %}
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">
-                                Submit
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
+<div class="card text-center text-white bg-dark formbox">
+  <div class="card-header">
+    <h2> Create an Account:</h2>
+    <h4>Fill in the form below to gain access and start Volunteering!</h4>
+  </div>
+
+  <div class="card-body">
+    <form class="form group" action="index.html" method="post">
+      <label for="example Input Email1">Email address</label>
+ <input type="email" class="form-control" id="exampleInputEmail1"
+  aria-describedby="emailHelp" placeholder="Enter email" required>
+
+ <small id="emailHelp" class="form-text text-muted">
+   We'll never share your email with anyone else.</small>
+
+   <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control"
+     id="exampleInputPassword1" placeholder="Password" required>
+
+     <label for="exampleFirstName">First Name</label>
+      <input type="firstname" class="form-control" id="exampleFirstName"
+        placeholder="First Name" required>
+
+    <label for="exampleLastName">Last Name</label>
+      <input type="lastname" class="form-control" id="examplelastName"
+        placeholder="Last Name">
+
+    <label for="exampleAddress">Address</label>
+     <input type="address" class="form-control" id="address"
+       placeholder="Address" required>
+
+       <label for="examplePhoneNumber">Phone Number</label>
+        <input type="phonenumber" class="form-control" id="phonenumber"
+          placeholder="Phone Number">
+
+    <label for="exampleOrganization">Organization</label>
+     <input type="organization" class="form-control" id="organization"
+       placeholder="Organization">
+    </form>
+  </div>
+
+  <div class="card-footer">
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+  </div>
 </div>
 {% endblock %}
