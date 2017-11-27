@@ -2,6 +2,7 @@
 ## Setup:
 
 ```
+pip3 install -Ur requirements.txt
 ./manage.py migrate
 ./manage.py createsuperuser
 ./manage.py runserver

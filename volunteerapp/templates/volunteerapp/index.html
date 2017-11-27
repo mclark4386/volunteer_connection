@@ -1,6 +1,37 @@
 {% extends 'volunteerapp/base.html' %}
 {% block Projects_active %}active{% endblock %}
 
+{% block query_string %}{{query_string}}{% endblock %}
+
 {% block body %}
-<h1 class="text-primary">Looking good! {{ user.username }}</h1>
+<h1 class="project-font"><strong> Projects </strong> </h1>
+{% if tags is not None %}
+<form id="tag_select_form" class='form-inline' role="search" method="get" action=''>
+  <input type="hidden" name="q" value="{{query_string}}"/>
+  <select name='tag' onchange="$('#tag_select_form').submit();">
+    <optgroup label="You can reset your search by selecting this:">
+      <option value=''>Tag To Filter By</option>
+    </optgroup>
+    <!-- {{selected_tag}} -->
+    <optgroup label="Tags">
+      {% for tag in tags %}
+        {% if tag.id == selected_tag %}
+          <option value='{{tag.id}}' selected>{{tag.name}}</option>
+        {% else %}
+          <option value='{{tag.id}}'>{{tag.name}}</option>
+        {% endif %}
+      {% endfor %}
+    </optgroup>
+  </select>
+</form>
+{% endif %}
+{% if projects|length > 0 %}
+<ul>
+  {% for project in projects %}
+  <li><a class="custom-fontspec project-font" href="#">{{ project.title }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<h5>No Projects Found</h5>
+{% endif %}
 {% endblock %}

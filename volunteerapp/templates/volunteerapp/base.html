@@ -23,9 +23,10 @@
     {% endif %}
 
     {% block bootstrap4_extra_head %}{% endblock %}
-        
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <script src="https://use.fontawesome.com/23f7c48fc6.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'volunteerapp/style.css' %}"/>
 
@@ -40,21 +41,22 @@
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">
             <a class="nav-link {% block projects_active %}{% endblock %}" href="{% url 'volunteerapp:index' %}">
-                <i class="fa fa-dot-circle-o" aria-hidden="true"></i>&nbsp;
+                <i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;
                 Projects
             </a>
           </li>
         </ul>
 
-        <form class="form-inline my-2 my-lg-0" role="search" method="get" action="#">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="q" value="">
+        <form class="form-inline my-2 my-lg-0" role="search" method="get" action="/">
+          <input type="hidden" name="tag" value="{{selected_tag}}"/>
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="q" value="{% block query_string %}{% endblock %}">
           <button class="btn btn-outline-default my-2 my-sm-0" type="submit">Search</button>
         </form>
 
         <ul class="navbar-nav">
           {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link {% block add_project_active %}{% endblock %}" href="{% url 'volunteerapp:project-add' %}">
+            <a class="nav-link {% block add_project_active %}{% endblock %}" href="/admin/volunteerapp/project/">
                 <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;
                 Add Project
             </a>
