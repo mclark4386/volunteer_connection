@@ -1,0 +1,14 @@
+{% extends 'volunteerapp/base.html' %}
+
+{% block body %}
+{% if users|length > 0 %}
+<ul class="list-group" style="margin: 1em;">
+  <li class="list-group-item active">Lead Volunteers</li>
+  {% for user in users %}
+  <li class="list-group-item"><a href="#">{{ user.username }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<h5>No Users Found</h5>
+{% endif %}
+{% endblock %}
