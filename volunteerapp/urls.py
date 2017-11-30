@@ -7,6 +7,7 @@ app_name = "volunteerapp"
 urlpatterns = [
 
     url(r'^$', views.Index, name="index"),
+    url(r'^leaderboard[s]*$', views.Leaderboard, name="leaderboard"),
     url(r'^projects/$', views.Index, name="project-add"),
     url(r'^signup/$', views.UserFormView.as_view(), name="signup"),
     url(r'^login$', auth_views.LoginView.as_view(
