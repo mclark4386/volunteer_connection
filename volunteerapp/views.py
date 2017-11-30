@@ -1,10 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
+from django.contrib.auth.models import User
 from .forms import UserForm
 from .models import UserProfile, Project, Tag
 from .search import get_query
 
+
+def Leaderboard(request):
+    users = User.objects.all()[:5]
+    context = {"users":users}
+    return render(request, 'volunteerapp/leaderboard.html', context)
 
 def Index(request):
     projects = []

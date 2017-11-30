@@ -1,0 +1,13 @@
+{% extends 'volunteerapp/base.html' %}
+
+{% block body %}
+{% if users|length > 0 %}
+<ul>
+  {% for user in users %}
+  <li><a class="custom-fontspec user-font" href="#">{{ user.username }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<h5>No Users Found</h5>
+{% endif %}
+{% endblock %}
