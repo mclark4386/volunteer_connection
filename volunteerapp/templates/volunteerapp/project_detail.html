@@ -9,25 +9,25 @@
   </div>
 
   <ul class="list-inline">
-  {% for tags in project.tags.all %}
-  <li class="list-inline-item"> <span class="badge badge-primary">{{ tags }}</span> </li>
-  {% endfor %}
+    {% for tags in project.tags.all %}
+      <li class="list-inline-item"> <span class="badge badge-primary">{{ tags }}</span> </li>
+    {% endfor %}
   </ul>
 
   <div class="card-body">
     <li><h5 class="card-title">Description</h5></li>
-    <p> {{ project.description }} </p>
+      <p> {{ project.description }} </p>
 
     <li><h5 class="card-title">Organization</h5></li>
-    <p> {{ project.organization }} </p>
+      <p> {{ project.organization }} </p>
 
     <li><h5 class="card-title">Locations</h5></li>
-    {% for locations in project.locations.all %}
-      <p> {{ locations }} </p>
-    {% endfor %}
+      {% for locations in project.locations.all %}
+        <p> {{ locations }} </p>
+      {% endfor %}
 
     <li><h5 class="card-title">Project Category</h5></li>
-    <p> {{ project.category }} </p>
+      <p> {{ project.category }} </p>
   </div>
 
 
