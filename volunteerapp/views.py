@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
 from django.contrib.auth.models import User
@@ -11,6 +11,12 @@ def Leaderboard(request):
     users = User.objects.all()[:5]
     context = {"users":users}
     return render(request, 'volunteerapp/leaderboard.html', context)
+
+def ProjectDetail(request, project_id):
+    project = get_object_or_404(Project, pk=project_id)
+    context = {"project":project}
+    return render(request, 'volunteerapp/project_detail.html', context)
+
 
 def Index(request):
     projects = []
