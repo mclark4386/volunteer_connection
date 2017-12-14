@@ -28,7 +28,7 @@
 {% if projects|length > 0 %}
 <ul>
   {% for project in projects %}
-  <li><a class="custom-fontspec project-font" href="#">{{ project.title }}</a></li>
+  <li><a class="custom-fontspec project-font" href="{% url 'volunteerapp:project_detail' project.id %}">{{ project.title }}</a></li>
   {% endfor %}
 </ul>
 {% else %}

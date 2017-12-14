@@ -1,6 +1,6 @@
 Django==1.11.5
-uwsgi==2.0.15
 django-extensions==1.9.7
 django-bootstrap4==0.0.4
 psycopg2==2.7.3.2
 Werkzeug==0.12.2
+uwsgi==2.0.15

@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^$', views.Index, name="index"),
     url(r'^leaderboard[s]*$', views.Leaderboard, name="leaderboard"),
     url(r'^projects/$', views.Index, name="project-add"),
+    url(r'^projects/(?P<project_id>[0-9]+)/$', views.ProjectDetail, name="project_detail"),
     url(r'^signup/$', views.UserFormView.as_view(), name="signup"),
     url(r'^login$', auth_views.LoginView.as_view(
         template_name='volunteerapp/login.html'), name="login"),
